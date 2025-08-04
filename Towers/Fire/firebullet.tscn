@@ -1,7 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dha7w8a8klfpa"]
+[gd_scene load_steps=17 format=3 uid="uid://dha7w8a8klfpa"]
 
 [ext_resource type="Script" path="res://Towers/Fire/firebullet.gd" id="1_iy34h"]
 [ext_resource type="Texture2D" uid="uid://co4lyedpjdgoi" path="res://Assets/Sprites/Projectiles/towerDefense_tile252.png" id="2_xbam1"]
+[ext_resource type="Texture2D" uid="uid://snlcitu88kg3" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/08.png" id="3_xrptm"]
+[ext_resource type="Texture2D" uid="uid://dx0ef2i14b30c" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/09.png" id="4_03rst"]
+[ext_resource type="Texture2D" uid="uid://77xalnligkth" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/10.png" id="5_vssio"]
+[ext_resource type="Texture2D" uid="uid://cfm7ocy7wp0rp" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/11.png" id="6_ytus8"]
+[ext_resource type="Texture2D" uid="uid://ylykb2le1k58" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/12.png" id="7_r62yt"]
+[ext_resource type="Texture2D" uid="uid://uurr30scrpou" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/13.png" id="8_yajo0"]
+[ext_resource type="Texture2D" uid="uid://dndl3jtxemdm2" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/14.png" id="9_7xq8v"]
+[ext_resource type="Texture2D" uid="uid://c66kf2rx4wy4y" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/15.png" id="10_y8in6"]
+[ext_resource type="Texture2D" uid="uid://dnovdg31pc4tx" path="res://Assets/Sprites/Free-Animated-Explosions/flame9/png/16.png" id="11_dghc8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7a6g6"]
 radius = 8.03045
@@ -16,6 +25,41 @@ radius = 75.0
 min_value = -1.0
 _data = [Vector2(0.540323, 0.142857), 0.0, 0.0, 0, 0, Vector2(0.790323, 0.0109891), 0.0, 0.0, 0, 0, Vector2(0.967742, -0.032967), 0.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w70rt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xrptm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_03rst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vssio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ytus8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_r62yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yajo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7xq8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y8in6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dghc8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
 
 [node name="RedBullet" type="CharacterBody2D"]
 scale = Vector2(-1.147, 0.658)
@@ -71,6 +115,16 @@ color = Color(1, 0.501961, 1, 0.682353)
 hue_variation_min = 1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_8ghg0")
+
+[node name="LingeringFlame" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.529412)
+position = Vector2(-2.17927, -4.64665)
+scale = Vector2(0.193502, 0.969753)
+sprite_frames = SubResource("SpriteFrames_w70rt")
+autoplay = "default"
+frame_progress = 0.558908
+offset = Vector2(-11.4719, -208.784)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="LingeringEffect/Timers/FireDuration" to="." method="_on_fire_duration_timeout"]

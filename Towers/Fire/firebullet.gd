@@ -1,15 +1,16 @@
 extends CharacterBody2D
-
+var collided= false
 var target
 var Speed = 400
 #setup in tower
 var bulletDamage 
 
 func _physics_process(_delta):
-	if is_instance_valid(target):
-		velocity = global_position.direction_to(target.position) * Speed
-		self.look_at(target.position)
-		move_and_slide()
+	if is_instance_valid(target) :
+		if not collided:
+			velocity = global_position.direction_to(target.position) * Speed
+			self.look_at(target.position)
+			move_and_slide()
 	else:
 		self.queue_free()
 
@@ -35,6 +36,10 @@ func explode(enemy):
 	get_node("LingeringEffect/Fire").global_position = enemy.global_position
 	get_node("LingeringEffect/Fire").visible = true
 	get_node("CPUParticles2D").emitting=false
+	collided=true
+	get_node("LingeringFlame").global_position = enemy.global_position 
+	get_node("LingeringFlame").global_rotation = 90
+	get_node("LingeringFlame").visible= true
 	get_node("LingeringEffect/Timers/FireDuration").start()
 	get_node("LingeringEffect/Timers/FireTick").start()
 
@@ -51,4 +56,5 @@ func _on_timer_fire_tick():
 
 
 func _on_fire_duration_timeout():
+	get_node("LingeringFlame").visible= false
 	self.queue_free()

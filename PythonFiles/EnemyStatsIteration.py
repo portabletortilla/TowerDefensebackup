@@ -1,12 +1,14 @@
 import socket
 import json
 import time
+import math
 import sys
 from nsga2.problem import Problem
 from nsga2.evolution import Evolution
 import random
 
 maxIntensity = 6
+f2Aux=1
 playerInv = []
 enemyStats = []
 opened_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -104,6 +106,15 @@ def StatSquishEval(Hp,Bd,Sr,Atk,Spd):
     fitness = 0
     for i in range(len(stats)):
         fitness += (Coef(stats[i],enemyStats[i]))
+    modifyF2(fitness)
+    return fitness
+
+def modifyF2(fitness):
+    global f2Aux
+    f2Aux = fitness
+
+def HealthEval(Hp,Bd,Sr,Atk,Spd):
+    fitness = 1/math.log(f2Aux,math.e)*Coef(enemyStats[0],Hp)
     return fitness
 
 if __name__ == "__main__":
