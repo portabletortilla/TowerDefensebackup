@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://damgyq1842yn2"]
+
+[ext_resource type="Script" path="res://Towers/Wind/bullet.gd" id="1_6rfcj"]
+[ext_resource type="Texture2D" uid="uid://dlvwmjfq1ituc" path="res://Assets/Sprites/Projectiles/towerDefense_tile251.png" id="2_rn3gu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7a6g6"]
+radius = 8.03045
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tghca"]
+radius = 11.2849
+
+[sub_resource type="Curve" id="Curve_hr6j1"]
+min_value = -1.0
+_data = [Vector2(0.540323, 0.142857), 0.0, 0.0, 0, 0, Vector2(0.790323, 0.0109891), 0.0, 0.0, 0, 0, Vector2(0.967742, -0.032967), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="RedBullet" type="CharacterBody2D"]
+scale = Vector2(-1.147, 0.658)
+collision_layer = 4
+script = ExtResource("1_6rfcj")
+
+[node name="TowerDefenseTile251" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(-1.147, 0.658)
+texture = ExtResource("2_rn3gu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+scale = Vector2(1.31561, 0.432964)
+shape = SubResource("CapsuleShape2D_7a6g6")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(-1.147, 0.658)
+collision_layer = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_tghca")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-11.3339, 0)
+amount = 30
+lifetime = 0.5
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 0.0
+gravity = Vector2(20, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+color = Color(1, 0.501961, 1, 0.682353)
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_hr6j1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

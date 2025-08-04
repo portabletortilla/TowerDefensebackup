@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dha7w8a8klfpa"]
+
+[ext_resource type="Script" path="res://Towers/Fire/firebullet.gd" id="1_iy34h"]
+[ext_resource type="Texture2D" uid="uid://co4lyedpjdgoi" path="res://Assets/Sprites/Projectiles/towerDefense_tile252.png" id="2_xbam1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7a6g6"]
+radius = 8.03045
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tghca"]
+radius = 11.2849
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7cd74"]
+radius = 75.0
+
+[node name="RedBullet" type="CharacterBody2D"]
+scale = Vector2(-1.147, 0.658)
+collision_layer = 4
+script = ExtResource("1_iy34h")
+
+[node name="FireBullet" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(-1.5, 0.861)
+texture = ExtResource("2_xbam1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+scale = Vector2(2, 0.659)
+shape = SubResource("CapsuleShape2D_7a6g6")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(-1.147, 0.658)
+collision_layer = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CapsuleShape2D_tghca")
+
+[node name="LingeringEffect" type="Node" parent="."]
+
+[node name="Fire" type="Area2D" parent="LingeringEffect"]
+
+[node name="Area" type="CollisionShape2D" parent="LingeringEffect/Fire"]
+shape = SubResource("CircleShape2D_7cd74")
+
+[node name="Timers" type="Node" parent="LingeringEffect"]
+
+[node name="FireDuration" type="Timer" parent="LingeringEffect/Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="FireTick" type="Timer" parent="LingeringEffect/Timers"]
+wait_time = 0.2
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="LingeringEffect/Timers/FireDuration" to="." method="_on_fire_duration_timeout"]
+[connection signal="timeout" from="LingeringEffect/Timers/FireTick" to="." method="_on_timer_fire_tick"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7bl5aka17ydr"]
+
+[ext_resource type="Script" path="res://Assets/Ui/towerIcons/tower_panel.gd" id="1_r3isc"]
+[ext_resource type="Texture2D" uid="uid://bxbqchb1huagl" path="res://Assets/Sprites/Towers/fireTower.png" id="2_bpch3"]
+[ext_resource type="FontFile" uid="uid://cgdbdkkr85xtx" path="res://Assets/Fonts/kenvector_future_thin.ttf" id="3_cepmh"]
+
+[node name="FireTowerPanel" type="Panel"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+scale = Vector2(0.175, 0.169)
+script = ExtResource("1_r3isc")
+towerPath = "res://Towers/Fire/fire_tower.tscn"
+baseCost = 15
+
+[node name="TowerDefenseTile250" type="Sprite2D" parent="."]
+position = Vector2(40, 41.4201)
+texture = ExtResource("2_bpch3")
+
+[node name="Price" type="Label" parent="TowerDefenseTile250"]
+offset_left = -34.2857
+offset_top = -41.4201
+offset_right = -11.2857
+offset_bottom = -23.4201
+pivot_offset = Vector2(22.8571, 11.8343)
+theme_override_fonts/font = ExtResource("3_cepmh")
+text = "15"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

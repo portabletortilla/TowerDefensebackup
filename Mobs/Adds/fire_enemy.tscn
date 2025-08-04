@@ -1,0 +1,159 @@
+[gd_scene load_steps=23 format=3 uid="uid://bwxhwmf4y0idr"]
+
+[ext_resource type="Texture2D" uid="uid://doeqj6sbmjq6c" path="res://Assets/Sprites/Enemies/towerDefense_tile246.png" id="1_4hxlk"]
+[ext_resource type="Script" path="res://Mobs/Adds/fire_enemy.gd" id="1_fhtxn"]
+[ext_resource type="Script" path="res://Mobs/Adds/HealthBar.gd" id="2_ny574"]
+[ext_resource type="Texture2D" uid="uid://dsh6l2as8tpxe" path="res://Assets/Sprites/Enemies/bubble.png" id="4_j0wag"]
+[ext_resource type="Texture2D" uid="uid://c4rtr363hiu1n" path="res://Assets/Sprites/Enemies/bubble2.png" id="5_2o1mr"]
+[ext_resource type="Texture2D" uid="uid://30wumc0enhj3" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_1.png" id="6_h1wak"]
+[ext_resource type="Texture2D" uid="uid://nve0jc7ws164" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_2.png" id="7_41ght"]
+[ext_resource type="Texture2D" uid="uid://ble3ltn1d10sr" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_3.png" id="8_3ps5e"]
+[ext_resource type="Texture2D" uid="uid://dok5050ymjkci" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_4.png" id="9_n4p8r"]
+[ext_resource type="Texture2D" uid="uid://cm6nx6bwnjjpe" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_5.png" id="10_tra7r"]
+[ext_resource type="Texture2D" uid="uid://b5gaco4a3q0wn" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_6.png" id="11_oapc0"]
+[ext_resource type="Texture2D" uid="uid://d4g5qptlku3mx" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_7.png" id="12_ng8sa"]
+[ext_resource type="Texture2D" uid="uid://rjjuer6ou5ld" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_8.png" id="13_8ek08"]
+[ext_resource type="Texture2D" uid="uid://c7trov82kspnx" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_9.png" id="14_vt7ii"]
+[ext_resource type="Texture2D" uid="uid://dj3lcftd54a5r" path="res://Assets/Sprites/Free-Animated-Explosions/PNG/Explosion_1/Explosion_10.png" id="15_6t51r"]
+[ext_resource type="Texture2D" uid="uid://bbexl7g7y2a4j" path="res://Assets/Ui/Art/Empty.png" id="16_cu2c2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3ntu"]
+radius = 20.0998
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nkj57"]
+radius = 100.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0mbn"]
+bg_color = Color(0.772549, 0.105882, 0.247059, 0.780392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wbo4"]
+bg_color = Color(0.283263, 0.884305, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lb5qt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_j0wag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2o1mr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yaaf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_cu2c2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h1wak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_41ght")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3ps5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n4p8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tra7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_oapc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ng8sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8ek08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vt7ii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6t51r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_cu2c2")
+}],
+"loop": false,
+"name": &"d",
+"speed": 30.0
+}]
+
+[node name="EnemyRed" type="CharacterBody2D"]
+collision_mask = 4096
+script = ExtResource("1_fhtxn")
+healthCoef = 1.5
+defenseCoef = 1.2
+fRCoef = 0.9
+damageCoef = 1.5
+
+[node name="TowerDefenseTile245" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.57176
+texture = ExtResource("1_4hxlk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x3ntu")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DebuffTimer" type="Timer" parent="Timers"]
+
+[node name="ImmunityTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+
+[node name="Explosion" type="Area2D" parent="."]
+visible = false
+collision_mask = 3
+
+[node name="ExplosionRadius" type="CollisionShape2D" parent="Explosion"]
+light_mask = 3
+visibility_layer = 3
+shape = SubResource("CircleShape2D_nkj57")
+
+[node name="HealthComponent" type="Node" parent="."]
+
+[node name="healthBar" type="ProgressBar" parent="HealthComponent"]
+offset_left = -24.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = -13.0
+pivot_offset = Vector2(26, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_l0mbn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5wbo4")
+value = 100.0
+show_percentage = false
+script = ExtResource("2_ny574")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.341176)
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_lb5qt")
+speed_scale = 0.5
+
+[node name="ExplosionGif" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-0.219667, 0.202693)
+sprite_frames = SubResource("SpriteFrames_yaaf3")
+animation = &"d"
+
+[connection signal="timeout" from="Timers/DebuffTimer" to="." method="_on_debuff_timer_timeout"]

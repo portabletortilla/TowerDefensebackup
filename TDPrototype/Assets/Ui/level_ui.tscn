@@ -1,0 +1,176 @@
+[gd_scene load_steps=11 format=3 uid="uid://f1qmpxfylu2l"]
+
+[ext_resource type="Script" path="res://Assets/Ui/level_ui.gd" id="1_4f4ln"]
+[ext_resource type="PackedScene" uid="uid://tium78gusss4" path="res://Assets/Ui/towerIcons/wind_tower_panel.tscn" id="1_tu5i8"]
+[ext_resource type="PackedScene" uid="uid://b7mj2yq1b0p3q" path="res://Assets/Ui/towerIcons/water_tower_panel.tscn" id="2_06njv"]
+[ext_resource type="PackedScene" uid="uid://c7bl5aka17ydr" path="res://Assets/Ui/towerIcons/fire_tower_panel.tscn" id="2_gfd5p"]
+[ext_resource type="FontFile" uid="uid://cgdbdkkr85xtx" path="res://Assets/Ui/Fonts/kenvector_future_thin.ttf" id="5_bg4w4"]
+[ext_resource type="PackedScene" uid="uid://rw8lae2wbkmc" path="res://Assets/Ui/towerIcons/elec_tower_panel.tscn" id="5_j2db0"]
+[ext_resource type="Script" path="res://Assets/Ui/ProgressBar.gd" id="7_lse6s"]
+
+[sub_resource type="Theme" id="Theme_hd5wa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7lrw"]
+bg_color = Color(0.6, 0.6, 0.6, 0.666667)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.364291, 0.233575, 0.110291, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cawc"]
+bg_color = Color(0.455124, 0.652264, 0.966717, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_4f4ln")
+restDuration = 5
+
+[node name="Show" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(20, 0)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -40.0
+offset_right = 4.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.28, 1)
+pivot_offset = Vector2(40, 20)
+size_flags_horizontal = 8
+
+[node name="Hide" type="Panel" parent="."]
+custom_minimum_size = Vector2(20, 0)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -40.0
+offset_right = -125.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.28, 1)
+pivot_offset = Vector2(40, 20)
+size_flags_horizontal = 8
+
+[node name="TowerSelection" type="Panel" parent="."]
+custom_minimum_size = Vector2(80, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = 221.0
+offset_right = -2.0
+offset_bottom = 221.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.62483, 0.463797)
+pivot_offset = Vector2(77.995, 7.60397)
+size_flags_horizontal = 8
+
+[node name="FlowContainer" type="FlowContainer" parent="TowerSelection"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.855
+offset_top = 34.9341
+offset_right = 52.145
+offset_bottom = 370.934
+grow_horizontal = 2
+scale = Vector2(0.738489, 2.30093)
+
+[node name="WindTowerPanel3" parent="TowerSelection/FlowContainer" instance=ExtResource("1_tu5i8")]
+layout_mode = 2
+metadata/towerString = "res://Towers/wind_tower.tscn"
+
+[node name="FireTowerPanel" parent="TowerSelection/FlowContainer" instance=ExtResource("2_gfd5p")]
+layout_mode = 2
+
+[node name="WaterTowerPanel" parent="TowerSelection/FlowContainer" instance=ExtResource("2_06njv")]
+layout_mode = 2
+
+[node name="ElecTowerPanel" parent="TowerSelection/FlowContainer" instance=ExtResource("5_j2db0")]
+layout_mode = 2
+
+[node name="HP" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 76.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("5_bg4w4")
+theme_override_font_sizes/font_size = 35
+text = "HP :"
+
+[node name="Currency" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 53.0
+offset_right = 226.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("5_bg4w4")
+theme_override_font_sizes/font_size = 35
+text = "Currency :"
+
+[node name="Rounds" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -201.0
+offset_top = 11.0
+offset_right = -10.0
+offset_bottom = 51.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_bg4w4")
+theme_override_font_sizes/font_size = 35
+text = "Round 1/X"
+
+[node name="Messages" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -744.0
+offset_right = -17.0
+offset_bottom = -721.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2.33071, 3.32661)
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_bg4w4")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 1.0
+offset_top = 809.0
+offset_right = 601.0
+offset_bottom = 849.0
+pivot_offset = Vector2(-354, -304)
+size_flags_vertical = 4
+theme = SubResource("Theme_hd5wa")
+theme_override_styles/background = SubResource("StyleBoxFlat_g7lrw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6cawc")
+script = ExtResource("7_lse6s")
+
+[node name="Timer" type="Timer" parent="ProgressBar"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="gui_input" from="Show" to="." method="hide_show_event"]
+[connection signal="gui_input" from="Hide" to="." method="hide_show_event"]
+[connection signal="timeout" from="ProgressBar/Timer" to="." method="_new_round_timeout"]
+[connection signal="timeout" from="ProgressBar/Timer" to="ProgressBar" method="_on_timer_timeout"]

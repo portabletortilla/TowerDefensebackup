@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=3 uid="uid://ynk1cb3jtao0"]
+
+[ext_resource type="Script" path="res://Assets/Ui/Rank.gd" id="1_hv6gy"]
+[ext_resource type="Texture2D" uid="uid://mqybm7jnt2dj" path="res://Assets/Ui/Art/00.png" id="1_l35nk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7ct2"]
+bg_color = Color(0.0901961, 0.109804, 0.101961, 0.784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.924374, 0.842215, 0.74746, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 7
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjvyp"]
+atlas = ExtResource("1_l35nk")
+region = Rect2(0, 130, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k76ha"]
+atlas = ExtResource("1_l35nk")
+region = Rect2(32, 130, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acabo"]
+atlas = ExtResource("1_l35nk")
+region = Rect2(64, 130, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulx83"]
+atlas = ExtResource("1_l35nk")
+region = Rect2(96, 130, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uirlm"]
+atlas = ExtResource("1_l35nk")
+region = Rect2(128, 130, 32, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_so00f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjvyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k76ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acabo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulx83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uirlm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_hv6gy")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = -245.0
+offset_right = -318.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(143, 29)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7ct2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 261.0
+offset_bottom = 59.0
+pivot_offset = Vector2(129, 26)
+
+[node name="Star1" type="AnimatedSprite2D" parent="Panel/HBoxContainer"]
+position = Vector2(26.4323, 23.0943)
+scale = Vector2(2.38542, 2.19872)
+sprite_frames = SubResource("SpriteFrames_so00f")
+frame_progress = 0.477559
+
+[node name="Star2" type="AnimatedSprite2D" parent="Panel/HBoxContainer"]
+position = Vector2(79.7657, 23.0943)
+scale = Vector2(2.38542, 2.19872)
+sprite_frames = SubResource("SpriteFrames_so00f")
+frame_progress = 0.827748
+
+[node name="Star3" type="AnimatedSprite2D" parent="Panel/HBoxContainer"]
+position = Vector2(133.099, 23.0943)
+scale = Vector2(2.38542, 2.19872)
+sprite_frames = SubResource("SpriteFrames_so00f")
+frame_progress = 0.401567
+
+[node name="Star4" type="AnimatedSprite2D" parent="Panel/HBoxContainer"]
+position = Vector2(186.432, 23.0942)
+scale = Vector2(2.38542, 2.19872)
+sprite_frames = SubResource("SpriteFrames_so00f")
+frame_progress = 0.222017
+
+[node name="Star5" type="AnimatedSprite2D" parent="Panel/HBoxContainer"]
+position = Vector2(239.766, 23.0942)
+scale = Vector2(2.38542, 2.19872)
+sprite_frames = SubResource("SpriteFrames_so00f")
+frame_progress = 0.497966
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="RankEnd" type="Marker2D" parent="."]
+position = Vector2(17, 180)
+
+[node name="RankStart" type="Marker2D" parent="."]
+position = Vector2(-278, 180)
+
+[connection signal="mouse_entered" from="Panel" to="." method="fade_out"]
+[connection signal="mouse_exited" from="Panel" to="." method="fade_in"]
+[connection signal="timeout" from="Timer" to="." method="exitAnimation"]

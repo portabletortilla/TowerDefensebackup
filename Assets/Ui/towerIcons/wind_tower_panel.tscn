@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://tium78gusss4"]
+
+[ext_resource type="Script" path="res://Assets/Ui/towerIcons/tower_panel.gd" id="1_5gkt4"]
+[ext_resource type="Texture2D" uid="uid://dc1mkg2qy6jdw" path="res://Assets/Sprites/Towers/towerDefense_tile249.png" id="2_8vd3q"]
+[ext_resource type="FontFile" uid="uid://cgdbdkkr85xtx" path="res://Assets/Fonts/kenvector_future_thin.ttf" id="3_pkvxe"]
+
+[node name="WindTowerPanel" type="Panel"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+scale = Vector2(0.175, 0.169)
+script = ExtResource("1_5gkt4")
+
+[node name="TowerDefenseTile249" type="Sprite2D" parent="."]
+position = Vector2(39.4433, 40.0348)
+scale = Vector2(0.928571, 0.891834)
+texture = ExtResource("2_8vd3q")
+
+[node name="Price" type="Label" parent="TowerDefenseTile249"]
+offset_left = -36.3236
+offset_top = -44.8904
+offset_right = -17.3236
+offset_bottom = -26.8904
+pivot_offset = Vector2(22.8571, 11.8343)
+theme_override_fonts/font = ExtResource("3_pkvxe")
+text = "5
+"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

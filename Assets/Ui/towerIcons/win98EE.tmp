@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://tium78gusss4"]
+
+[ext_resource type="Texture2D" uid="uid://bcjhciam5u615" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png" id="2_lxuym"]
+
+[sub_resource type="GDScript" id="GDScript_81mew"]
+script/source = "extends Panel
+
+@onready var tower = preload(\"res://Towers/wind_tower.tscn\")
+var currTile
+
+
+func _on_gui_input(event):
+	var tempTower = tower.instantiate()
+	
+	if event is InputEventMouseButton and event.button_mask == 1 :
+		#\"Left click down\" 
+		add_child(tempTower)
+		tempTower.process_mode = Node.PROCESS_MODE_DISABLED
+		
+	elif event is InputEventMouseButtonMotion and event.button_mask == 1 :
+		#\"Left click drag\" 
+		get_child(1).global_position = event.global_position
+	
+	elif event is InputEventMouseButton and event.button_mask == 0 :
+		#\"Left click up\"
+		print(\"Tower planted\")
+"
+
+[node name="WindTowerPanel" type="Panel"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+scale = Vector2(0.175, 0.169)
+script = SubResource("GDScript_81mew")
+
+[node name="TowerDefenseTile249" type="Sprite2D" parent="."]
+position = Vector2(39.4433, 40.0348)
+scale = Vector2(0.928571, 0.891834)
+texture = ExtResource("2_lxuym")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

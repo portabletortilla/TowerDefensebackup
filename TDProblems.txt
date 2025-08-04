@@ -1,0 +1,13 @@
+Problems noted in version of game:
+
+When FullScreen:
+Issues during tower placement
+
+Besides that:
+
+Tower detection can be a bit wonky and need to take in mind that placemente detection for space is with mouse;
+
+Gift drops are unobtainable if they are beneath the tower selection screen- fixed
+
+Upgrade screens can clip out of the screen
+

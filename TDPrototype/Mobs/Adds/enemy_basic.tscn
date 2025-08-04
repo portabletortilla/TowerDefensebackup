@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://kmm2mv3muped"]
+
+[ext_resource type="Script" path="res://Mobs/Adds/enemy_basic.gd" id="1_3vxt2"]
+[ext_resource type="Texture2D" uid="uid://w85ut0ljktqb" path="res://Assets/Sprites/Enemies/towerDefense_tile247.png" id="2_2efpd"]
+[ext_resource type="Script" path="res://Mobs/Adds/HealthBar.gd" id="3_mpfcf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6a6u"]
+radius = 20.0998
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhwso"]
+bg_color = Color(0.772549, 0.105882, 0.247059, 0.780392)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrky3"]
+bg_color = Color(0.283263, 0.884305, 0, 1)
+
+[node name="Enemy A" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_3vxt2")
+
+[node name="TowerDefenseTile245" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.57176
+texture = ExtResource("2_2efpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q6a6u")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DebuffTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+
+[node name="HealthComponent" type="Node" parent="."]
+
+[node name="healthBar" type="ProgressBar" parent="HealthComponent"]
+visible = false
+offset_left = -24.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = -13.0
+pivot_offset = Vector2(26, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_nhwso")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xrky3")
+value = 100.0
+show_percentage = false
+script = ExtResource("3_mpfcf")
+
+[connection signal="timeout" from="Timers/DebuffTimer" to="." method="_on_debuff_timer_timeout"]

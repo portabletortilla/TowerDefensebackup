@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://ckdandu0bdgfr"]
+
+[ext_resource type="Script" path="res://Mobs/Adds/water_enemy.gd" id="1_fkrxw"]
+[ext_resource type="Texture2D" uid="uid://dgl7r2l40csdu" path="res://Assets/Sprites/Enemies/towerDefense_tile248.png" id="2_tcu5l"]
+[ext_resource type="Script" path="res://Mobs/Adds/HealthBar.gd" id="3_uillw"]
+[ext_resource type="Texture2D" uid="uid://dsh6l2as8tpxe" path="res://Assets/Sprites/Enemies/bubble.png" id="4_itd30"]
+[ext_resource type="Texture2D" uid="uid://c4rtr363hiu1n" path="res://Assets/Sprites/Enemies/bubble2.png" id="5_dgiy1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3ntu"]
+radius = 20.0998
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nkj57"]
+radius = 100.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0mbn"]
+bg_color = Color(0.772549, 0.105882, 0.247059, 0.780392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wbo4"]
+bg_color = Color(0.283263, 0.884305, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uj8pk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_itd30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dgiy1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyBlue" type="CharacterBody2D"]
+collision_mask = 4096
+script = ExtResource("1_fkrxw")
+healthCoef = 1.25
+defenseCoef = 2.5
+fRCoef = 0.75
+damageCoef = 2.0
+speedCoef = 0.75
+shielding = 2
+
+[node name="TowerDefenseTile245" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.57176
+texture = ExtResource("2_tcu5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x3ntu")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DebuffTimer" type="Timer" parent="Timers"]
+wait_time = 10.0
+
+[node name="AbilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+autostart = true
+
+[node name="ImmunityTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+
+[node name="Explosion" type="Area2D" parent="."]
+visible = false
+collision_mask = 3
+
+[node name="ExplosionRadius" type="CollisionShape2D" parent="Explosion"]
+light_mask = 3
+visibility_layer = 3
+shape = SubResource("CircleShape2D_nkj57")
+
+[node name="HealthComponent" type="Node" parent="."]
+
+[node name="healthBar" type="ProgressBar" parent="HealthComponent"]
+offset_left = -24.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = -13.0
+pivot_offset = Vector2(26, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_l0mbn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5wbo4")
+value = 100.0
+show_percentage = false
+script = ExtResource("3_uillw")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.341176)
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_uj8pk")
+frame_progress = 0.941279
+speed_scale = 0.5
+
+[connection signal="timeout" from="Timers/DebuffTimer" to="." method="_on_debuff_timer_timeout"]
+[connection signal="timeout" from="Timers/AbilityTimer" to="." method="onTimerRegen"]

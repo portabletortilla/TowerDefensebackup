@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://kmm2mv3muped"]
+
+[ext_resource type="Script" path="res://Mobs/Adds/enemy_green.gd" id="1_0kcis"]
+[ext_resource type="Texture2D" uid="uid://cf1yr0lwi73wa" path="res://Assets/Sprites/Enemies/towerDefense_tile245.png" id="2_c2oaa"]
+[ext_resource type="Script" path="res://Mobs/Adds/HealthBar.gd" id="3_g3y1r"]
+[ext_resource type="Texture2D" uid="uid://dsh6l2as8tpxe" path="res://Assets/Sprites/Enemies/bubble.png" id="4_sxxiq"]
+[ext_resource type="Texture2D" uid="uid://c4rtr363hiu1n" path="res://Assets/Sprites/Enemies/bubble2.png" id="5_al0li"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6a6u"]
+radius = 20.0998
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhwso"]
+bg_color = Color(0.772549, 0.105882, 0.247059, 0.780392)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrky3"]
+bg_color = Color(0.283263, 0.884305, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rk8q6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sxxiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_al0li")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyGreen" type="CharacterBody2D"]
+collision_mask = 4096
+safe_margin = 0.1
+script = ExtResource("1_0kcis")
+
+[node name="TowerDefenseTile245" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.57176
+texture = ExtResource("2_c2oaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q6a6u")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DebuffTimer" type="Timer" parent="Timers"]
+
+[node name="ImmunityTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+
+[node name="HealthComponent" type="Node" parent="."]
+
+[node name="healthBar" type="ProgressBar" parent="HealthComponent"]
+offset_left = -24.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = -13.0
+pivot_offset = Vector2(26, 2)
+theme_override_constants/outline_size = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_nhwso")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xrky3")
+value = 100.0
+show_percentage = false
+script = ExtResource("3_g3y1r")
+
+[node name="Bubble" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.341176)
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_rk8q6")
+frame_progress = 0.565107
+speed_scale = 0.5
+
+[connection signal="timeout" from="Timers/DebuffTimer" to="." method="_on_debuff_timer_timeout"]
+[connection signal="timeout" from="Timers/ImmunityTimer" to="." method="_on_immunity_timer_timeout"]
