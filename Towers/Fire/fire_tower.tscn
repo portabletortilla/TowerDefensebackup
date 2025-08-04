@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c1yqhkkprayxr"]
+[gd_scene load_steps=26 format=3 uid="uid://c1yqhkkprayxr"]
 
 [ext_resource type="Script" path="res://Towers/Fire/fire_tower.gd" id="1_46pk2"]
 [ext_resource type="Texture2D" uid="uid://bxbqchb1huagl" path="res://Assets/Sprites/Towers/fireTower.png" id="2_mos31"]
@@ -113,6 +113,8 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 border_blend = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lm1cv"]
 
 [node name="FireTower" type="StaticBody2D"]
 light_mask = 2
@@ -241,6 +243,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="n" type="Label" parent="UpgradeNode/Panel/HBox/Upgrade1"]
+layout_mode = 0
 offset_left = 3.2
 offset_top = 39.0
 offset_right = 73.2
@@ -291,6 +294,7 @@ scale = Vector2(0.0154937, 0.0460799)
 texture = ExtResource("6_vk1y8")
 
 [node name="n" type="Label" parent="UpgradeNode/Panel/HBox/Upgrade2"]
+layout_mode = 0
 offset_left = 3.52622
 offset_top = 39.1402
 offset_right = 60.5262
@@ -330,6 +334,7 @@ scale = Vector2(0.005, -0.005)
 texture = ExtResource("7_yydsb")
 
 [node name="n" type="Label" parent="UpgradeNode/Panel/HBox/Upgrade3"]
+layout_mode = 0
 offset_left = 2.44686
 offset_top = 39.1402
 offset_right = 89.4469
@@ -419,6 +424,7 @@ show_percentage = false
 script = ExtResource("7_fb6j1")
 
 [node name="LingeringFlame" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lm1cv")
 
 [connection signal="input_event" from="." to="." method="_click_tower"]
 [connection signal="body_entered" from="Tower" to="." method="_on_tower_body_entered"]
