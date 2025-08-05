@@ -19,7 +19,7 @@ func _on_main_menu_start_level(i:int):
 func set_global_variables(i:int):
 	Global.currLevel=i
 	Global.health= 20
-	Global.currency= 100
+	Global.currency= 25
 	Global.presentMult = 1
 	Global.currentRound = 0
 	Global.PlayerRank=3
@@ -42,7 +42,7 @@ func obtainBaseStats():
 	var file = FileAccess.open("res://Score/"+ files[files.size() - 1], FileAccess.READ)
 	var content = file.get_as_text()
 	var lines = content.split("\n",false)
-	
+	print(lines)
 	for i in range(1,len(lines)):
 		var aux = lines[i].split(":",false)
 		Global.ExpectedScorePerLevel[aux[0]] = float(aux[1])
@@ -64,7 +64,8 @@ func updateScoresFile():
 	
 func _on_main_menu_quit_game():
 	#print("Exiting Game")
-	updateScoresFile()
+	if(not Global.ExpectedScorePerLevel.is_empty()):
+		updateScoresFile()
 	get_tree().quit()
 
 func _next_level(currMap):
